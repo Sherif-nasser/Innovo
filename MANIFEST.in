@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include innovo *.css
+recursive-include innovo *.csv
+recursive-include innovo *.html
+recursive-include innovo *.ico
+recursive-include innovo *.js
+recursive-include innovo *.json
+recursive-include innovo *.md
+recursive-include innovo *.png
+recursive-include innovo *.py
+recursive-include innovo *.svg
+recursive-include innovo *.txt
+recursive-exclude innovo *.pyc
