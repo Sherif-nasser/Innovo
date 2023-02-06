@@ -20,23 +20,26 @@ frappe.ui.form.on("Appraisal", {
     },
     before_save:function(frm,cdt,cdn){
         var d = locals[cdt][cdn];
-
-        
         var row_earned_amount = 0;
-        var total_money_recieved = 0;
+        var total_money_recieved = 0.00;
+        var total_percentage = 0.00;
+        var total_lines = 0;
+        var all_lines_percentage = 0.00;
         $.each(frm.doc.goals || [], function(i, row) {
-            console.log(row.amount);
-            console.log(row.score_percentage)
             row_earned_amount = row.amount * (row.score_percentage / 100);
-            total_money_recieved += row_earned_amount 
-         
-     
+            total_money_recieved += row_earned_amount;
+            total_percentage += row.score_percentage;
+            total_lines += row.idx;
         });
-        console.log(row_earned_amount);
-        console.log(total_money_recieved)
+        console.log(total_lines -1 );
+        all_lines_percentage = total_percentage / ((total_lines-1) * 100) * 100;
         d.percentage = total_money_recieved;
-        
+        d.total_percentage = all_lines_percentage;
+        d.total_score = 5;
+         
         frm.refresh_field("percentage");
+        frm.refresh_field("total_percentage");
+        frm.refresh_field("total_score");
     },
     on_submit:function(frm,cdt,cdn){
         var d = locals[cdt][cdn];
@@ -69,15 +72,17 @@ frappe.ui.form.on("Appraisal", {
 })
 
 frappe.ui.form.on("Appraisal Goal", {
-    score:function(frm,cdt,cdn){
-        var d = locals[cdt][cdn];
-        var x = d.score /5;
-        var score_percentage =  (x * 100);
-        d.score_percentage =  score_percentage;
-        frm.refresh();
-    },
-    score_percentage:function(frm){
-        frm.refresh_field("score_percentage");
-    }
+    // score:function(frm,cdt,cdn){
+    //     var d = locals[cdt][cdn];
+    //     var x = d.score /5;
+    //     var score_percentage =  (x * 100);
+    //     d.score_percentage =  score_percentage;
+    //     frm.refresh();
+    // },
+    // score_percentage:function(frm){
+        
+    //     frm.refresh_field("score_percentage");
+    // }
+
     
 })
