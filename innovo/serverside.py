@@ -11,13 +11,14 @@ from frappe.utils import cint, cstr, flt, get_link_to_form, getdate, new_line_se
 
 
 @frappe.whitelist()
-def update_additional_salary(emplyee,salary_component,amount):
+def update_additional_salary(emplyee,salary_component,amount,ratio):
 
 
     doc = frappe.new_doc('Additional Salary')
     doc.employee = emplyee
     doc.amount = float(amount)
     doc.salary_component = salary_component
+    doc.kpi_ration = ratio
 
     return doc.insert()
 

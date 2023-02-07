@@ -48,6 +48,7 @@ frappe.ui.form.on("Appraisal", {
         var amount = d.percentage;
         var start_date = d.start_date;
         var end_date = d.end_date;
+        var ratio = d.total_percentage;
 
         if(d.percentage){
             console.log("start");
@@ -58,7 +59,8 @@ frappe.ui.form.on("Appraisal", {
                     salary_component: S_component,
                     amount : parseFloat(amount),
                     start_date : start_date,
-                    end_date : end_date
+                    end_date : end_date,
+                    ratio:ratio
                 },
                 callback: function(r) {
                     console.log(r.message);
